@@ -18,8 +18,8 @@ int punchCount = 0;
 int accelCount = 0;
 float speedOne = 0; 
 const int increaseButtonPin = 2;
-const int decreaseButtonPin = 4; 
-const int startButtonPin = 3; 
+const int decreaseButtonPin = 3; 
+const int startButtonPin = 4; 
 float weight = 60.0; 
 
 const int maxDisplayLines = 2;
