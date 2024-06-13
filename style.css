@@ -1,0 +1,45 @@
+
+*{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+}
+#weightForm{
+    position: fixed; /* or absolute */
+    
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -165px;
+}
+h1{
+    position: fixed; /* or absolute */
+  top: 50%;
+  left: 50%;
+
+  margin-top: -100px;
+  margin-left: -100px;
+}
+.bubba{
+    border-radius: 5px;
+    border-color: green;
+    background-color: green;
+    border-color: green;
+    color: white;
+    
+}
+
+.bubba:hover {animation: shaking 0.5s ;}
+
+      @keyframes shaking {
+         0% {transform: rotate(0deg);}
+         20% {transform: rotate(-8deg);}
+         50% {transform: rotate(0deg);}
+         70% {transform: rotate(8deg);}
+         100% {transform: rotate(0deg);}
+      }
+
+.bubba:active{
+    background-color: rgb(0, 64, 0);
+    border-color: rgb(0, 64, 0);
+    border-color: rgb(0, 64, 0);
+}

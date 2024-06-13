@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Puncher</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <h1>Punching Data</h1>
+  <form id="weightForm">
+    <label for="weight">Enter Weight (kg):</label>
+    <input type="number" id="weight" name="weight" value="60">
+    <button type="button" class="bubba" onclick="submitWeight()">Submit</button>
+  </form>
+  <p id="result"></p>
+  <p id="averageAccel">Average Acceleration: 0, Punching Power: 0 N</p>
+
+  <script src="script.js" defer></script>
+</body>
+<script>
+  function submitWeight() {
+    var weight = document.getElementById('weight').value;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/setWeight', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        document.getElementById('result').innerText = xhr.responseText;
+      }
+    };
+    xhr.send('weight=' + weight);
+  }
+
+  function submitWeight() {
+    var weight = document.getElementById('weight').value;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/setWeight', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        document.getElementById('result').innerText = xhr.responseText;
+        // After setting weight, fetch average acceleration
+        fetchAverageAccel();
+      }
+    };
+    xhr.send('weight=' + weight);
+  }
+
+  function fetchAverageAccel() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/averageAccel', true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        var averageAccel = parseFloat(xhr.responseText);
+        var weight = parseFloat(document.getElementById('currentWeight').innerText);
+        var punchingPower = averageAccel * (weight / 100) * 50;
+        document.getElementById('averageAccel').innerText = 'Average Acceleration: ' + averageAccel.toFixed(2) + ', Punching Power: ' + punchingPower.toFixed(2) + ' N';
+      }
+    };
+    xhr.send();
+  }
+  
+
+  
+  // Fetch initial average acceleration and set up interval
+  fetchAverageAccel();
+  setInterval(fetchAverageAccel, 1000);
+
+
+</script>
+
+</html>
